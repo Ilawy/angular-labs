@@ -1,0 +1,2 @@
+<app-form (createTodo)="todoPush($event)" />
+<app-list [tasks]="tasks" (deleteTodo)="todoDelete($event)" (toggleTodoState)="todoToggle($event)" />

@@ -1,0 +1,21 @@
+
+<ul class="list-group mx-auto" style="max-width: 64ch;">
+    @for (task of tasks; track task.id) {
+        <li class="d-flex align-items-center gap-2 list-group-item">
+            <div class="d-flex gap-1">
+                <button (click)="toggleTodoStateHandler(task.id)" class="btn btn-outline-dark">
+                    {{task.done ? "Undo" : "Done"}}
+                </button>
+                <button (click)="deleteTodoHandler(task.id)" class="btn btn-outline-danger">Delete</button>
+            </div>
+            <span [class]="{
+                done: task.done
+            }">{{task.content}}</span>
+        </li>
+    } @empty {
+        <p class="text-center">
+            {{getEmptyQuote().quote}}
+        </p>
+        <i class="text-center">Add something to start</i>
+    }
+</ul>

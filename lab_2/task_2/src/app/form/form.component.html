@@ -1,0 +1,8 @@
+<div class="custom-form p-3 rounded-3 my-3">
+    <h2>Todo App</h2>
+    <form (submit)="createTodoHandler($event)" class="d-flex flex-column gap-3">
+        <label for="task" class="form-label align-self-end">Add New To-Do</label>
+        <input required type="text" class="form-control" name="task" id="task" placeholder="Enter new task">
+        <button class="btn btn-outline-light align-self-end">Add</button>
+    </form>
+</div>
