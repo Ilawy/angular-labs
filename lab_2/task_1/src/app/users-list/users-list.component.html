@@ -1,0 +1,26 @@
+<div class="row p-3">
+    <div class="d-flex">
+        <div class="input-group input-group-md mb-3">
+            <input
+                type="search"
+                class="form-control"
+                placeholder="Search by name"
+                [disabled]="loading"
+                (input)="search($event)"
+
+            >
+            <span class="input-group-text">
+                <button [disabled]="loading" (click)="applySearch()" class="btn">Search</button>
+            </span>
+        </div>
+    </div>
+    @if (!loading && users.length === 0) {
+        <p>No users yet</p>
+    } @else {
+        <div class="row gap-1 justify-content-center">
+            @for (user of users; track user.id) {
+                <app-user-card style="display: contents;" [user]="user" />
+            }
+        </div>
+    }
+</div>
