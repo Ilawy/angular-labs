@@ -1,0 +1,81 @@
+<div class="container mx-auto flex flex-col min-h-[30vh]">
+    @if (loading) {
+        "loading"
+    } @else if (error) {
+        {{ error.message }}
+    } @else if (product) {
+        <!-- avodining nullable value -->
+        <div class="p-3 w-full flex flex-col md:flex-row">
+            <div
+                class="p-3 border flex flex-col items-center"
+                style="flex-basis: 50%"
+            >
+                <!-- side a -->
+                <img
+                    [src]="product.images.at(currentImage)"
+                    class="w-[320px]"
+                    alt=""
+                >
+                <div>
+                    <!-- there's only single image for each product :( -->
+                </div>
+            </div>
+            <div class="flex-1 border flex flex-col p-3 gap-7 border-red-50">
+                <!-- side b -->
+                <h2 class="text-3xl font-bold">{{ product.title }}</h2>
+                <p class="max-w-[48ch] text-balance">
+                    {{ product.description }}
+                </p>
+                <!-- TODO: rate -->
+                <div class="flex items-center gap-3">
+                    <div
+                        class="text-yellow-300 rate"
+                        [style]='"background-position: " +
+                        ((product.rating / 5) * 120) + "px"'
+                    >
+                        ★★★★★
+                    </div>
+                    {{ product.rating }}
+                </div>
+
+                <span class="text-2xl">{{ product.price }}EGP</span>
+                <span class="badge">
+                    {{ product.stock > 0 ? "In" : "Out of" }} stock
+                </span>
+                <div class="flex flex-col">
+                    <span>More info</span>
+                    <div class="flex flex-wrap gap-2">
+                        @for (category of product.tags; track $index) {
+                            <span class="badge badge-neutral">{{
+                                    category
+                                }}</span>
+                        }
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap gap-3">
+                    <div class="join">
+                        <button class="btn join-item rounded-l-full">-</button>
+                        <input
+                            class="input join-item w-[5ch] text-center bg-base-100"
+                            [defaultValue]="0"
+                        />
+                        <button class="btn join-item rounded-r-full">+</button>
+                    </div>
+                    @if (product.stock <= 10) {
+                        <p class="text-orange-400">
+                            Only {{ product.stock }} item(s) left, hurry up!
+                        </p>
+                    }
+                </div>
+                <div class="flex items-center gap-3 flex-wrap">
+                    <button class="btn btn-primary">
+                        Buy now
+                    </button>
+                    <button class="btn btn-primary btn-outline">
+                        Add to cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,29 @@
+@if(product){
+    <a class="card bg-base-100 shadow-xl border border-gray-700 w-[32ch] m-3 inline-block text-left" [routerLink]="'/product/' + product.id">
+        <figure class="relative">
+            <span class="absolute top-2 left-2 badge badge-success">
+                {{product.stock > 0 ? "In" : "Out of"}} stock
+            </span>
+            <img
+                [src]="product.images[0]"
+                class=""
+                alt="Shoes"
+            />
+        </figure>
+        <div class="card-body">
+            <div class="card-title flex items-center justify-between flex-wrap">
+                <span>{{ product.title }}</span>
+                <span class="font-normal">{{product.price}}EGP</span>
+            </div>
+            <div class="text-yellow-300 rate" [style]="'background-position: ' + ((product.rating / 5) * 120) + 'px'">
+                ★★★★★
+             </div>
+            {{ product.tags.join(", ") }}
+            <div class="card-actions justify-end">
+                <button class="btn btn-sm btn-primary">Buy Now</button>
+            </div>
+        </div>
+    </a>
+}@else {
+    <i>Something went wrong</i>
+}

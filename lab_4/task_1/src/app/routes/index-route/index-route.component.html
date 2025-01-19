@@ -1,0 +1,19 @@
+@if (loading) {
+    ...
+} @else if (error) {
+    {{ error.message }}
+} @else {
+    <!-- <div class="container mx-auto">
+        <div class="grid grid-cols-5 gap-3">
+           @for (product of products; track product.id) {
+            <app-product-card [product]="product" />
+           }
+        </div>
+    </div> -->
+}
+
+<div class="columns-1 text-center p-3 sm:columns-2 lg:columns-3 xl:columns-4">
+    @for (product of products; track product.id) {
+        <app-product-card class="contents" [product]="product" />
+    }
+</div>

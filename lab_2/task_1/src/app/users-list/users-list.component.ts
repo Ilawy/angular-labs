@@ -16,7 +16,7 @@ export class UsersListComponent {
   searchTerm: string | null = null;
 
   async ngOnInit() {
-    const result = await fetch("./users.json")
+    await fetch("./users.json")
       .then((resp) => resp.json())
       .then((data) => {
         this.users = data;
