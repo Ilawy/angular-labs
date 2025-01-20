@@ -83,7 +83,6 @@
                 formControlName="passwordConfirm"
             />
         </label>
-        {{formControls["passwordConfirm"].touched}}
         <div class="label">
             @if (!formControls["passwordConfirm"].valid && formControls["password"].touched) {
                 <span class="label-text-alt font-bold text-error">
@@ -96,8 +95,7 @@
             Login
         </button>
     </form>
-    <div class="my-3">
+    <div class="my-3 max-w-xl mx-auto">
         Already a user? <a class="underline" routerLink="/login">Login</a>
-        <!-- BONUS: no validation can be shown here, the button will be disabled until user fill all inputs -->
     </div>
 </div>

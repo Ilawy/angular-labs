@@ -1,8 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, effect, inject, signal } from "@angular/core";
 import { Product } from "../../types/product";
-import { RouterLink } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { ProductCardComponent } from "../../components/product-card/product-card.component";
 import { chunk } from "../../../lib/utils";
+import { HttpClient } from "@angular/common/http";
+import { ProductsService } from "../../services/products.service";
+import { lastValueFrom } from "rxjs";
 
 @Component({
   selector: "app-index-route",
@@ -15,21 +18,35 @@ export class IndexRouteComponent {
   loading = false;
   error: Error | null = null;
 
-  _sm_media = window.matchMedia("(max-width: 300px)");
+  private httpClient = inject(HttpClient);
 
-  elementsPerChunk = this._sm_media.matches ? 2 : 4;
+  currentPage = signal<null | number>(null);
+  pageCount = signal<number>(1);
+
+  constructor(
+    private router: ActivatedRoute,
+    private productsService: ProductsService,
+  ) {
+    router.queryParams
+      .subscribe((params) => {
+        // this.currentPage.set()
+        const rawPage = +params["page"];
+        const page = isNaN(rawPage) || rawPage < 1 ? 1 : rawPage;
+        console.log(page);
+        
+        this.currentPage.set(page);
+        lastValueFrom(productsService.getList(page - 1)).then(d=>{
+          this.products = d.products
+          this.pageCount.set(Math.ceil(d.total / 10))
+        })
+      });
+  }
+
+
+  range(length: number){
+    return Array.from({ length }).map((_, i)=>i)
+  }
 
   ngOnInit() {
-    fetch("./products.json")
-      .then((d) => d.json())
-      .then((d) => d.products)
-      // .then(d=>(console.log(d), d))
-      .then((d) => this.products = d)
-      .catch((e) => this.error = e)
-      .finally(() => this.loading = false);
-
-    this._sm_media.onchange = () => {
-      console.log(this._sm_media);
-    };
   }
 }

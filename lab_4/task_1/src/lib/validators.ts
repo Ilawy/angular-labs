@@ -4,6 +4,7 @@ function validatorError(name: string, message: string) {
     return { [name]: message };
 }
 
+
 export function passwordValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
         const strVal = control.value as string | null;
@@ -37,8 +38,9 @@ export function passwordValidator(): ValidatorFn {
 export function passwordConfirmValidator(sibling: string): ValidatorFn {
     
     return (control: AbstractControl): ValidationErrors | null =>{
-        
-        return validatorError("custom_password", "Password and password confirmation must be the same");        
-        // return null
+        if(!control.parent)return validatorError("custom_password", "Cannot access controls")
+
+        if(!control.value || control.value !== control.parent.get(sibling)?.value) return validatorError("custom_password", "Password and password confirmation must be the same");        
+        return null
     }
 }

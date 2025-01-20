@@ -1,12 +1,12 @@
 @if(product){
     <a class="card bg-base-100 shadow-xl border border-gray-700 w-[32ch] m-3 inline-block text-left" [routerLink]="'/product/' + product.id">
         <figure class="relative">
-            <span class="absolute top-2 left-2 badge badge-success">
+            <span class="absolute top-2 left-2 badge badge-success text-white font-bold">
                 {{product.stock > 0 ? "In" : "Out of"}} stock
             </span>
             <img
                 [src]="product.images[0]"
-                class=""
+                class="h-48 object-cover"
                 alt="Shoes"
             />
         </figure>

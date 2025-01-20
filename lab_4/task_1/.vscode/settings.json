@@ -1,0 +1,12 @@
+{
+    "folder-color.pathColors": [
+        {
+            "folderPath": "task_1/src/app/routes/index-route/",
+            "color": "foldercolorizer.color_00cc00",
+        },
+        {
+            "folderPath": "task_1/src/",
+            "color": "foldercolorizer.color_00ccff"
+        }
+    ]
+}
