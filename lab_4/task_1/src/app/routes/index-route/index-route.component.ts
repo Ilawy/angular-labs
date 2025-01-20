@@ -15,29 +15,21 @@ export class IndexRouteComponent {
   loading = false;
   error: Error | null = null;
 
+  _sm_media = window.matchMedia("(max-width: 300px)");
 
-  _sm_media = window.matchMedia("(max-width: 300px)")
-  
-  elementsPerChunk = this._sm_media.matches ? 2 : 4
+  elementsPerChunk = this._sm_media.matches ? 2 : 4;
 
   ngOnInit() {
     fetch("./products.json")
-    .then(d=>d.json())
-    .then(d=>d.products)
-    // .then(d=>(console.log(d), d))
-    .then(d=>this.products = d)
-    .catch(e=>this.error = e)
-    .finally(()=>this.loading = false)
-    
-    this._sm_media.onchange = ()=>{
+      .then((d) => d.json())
+      .then((d) => d.products)
+      // .then(d=>(console.log(d), d))
+      .then((d) => this.products = d)
+      .catch((e) => this.error = e)
+      .finally(() => this.loading = false);
+
+    this._sm_media.onchange = () => {
       console.log(this._sm_media);
-      
-    }
-    
-
+    };
   }
-
-  
-
-  
 }

@@ -1,1 +1,103 @@
-<p>register-route works!</p>
+<div class="container mx-auto p-3">
+    <form
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+        class="border border-primary rounded-xl shadow-lg max-w-xl mx-auto p-3"
+    >
+        <h1 class="text-3xl font-bold mt-3 mb-5">Login</h1>
+        <label class="input input-bordered flex items-center gap-2">
+            Name
+            <input
+                type="text"
+                class="grow max-w-sm"
+                placeholder="Tony Stark"
+                name="name"
+                formControlName="name"
+            />
+        </label>
+        <div class="label">
+            @if (!formControls["name"].valid && formControls['name'].touched) {
+                <span class="label-text-alt font-bold text-error">
+                    {{errorHandler('name')}}
+                </span>
+            }
+        </div>
+        <label class="input input-bordered flex items-center gap-2">
+            Email
+            <input
+                type="email"
+                class="grow max-w-sm"
+                placeholder="user@example.com"
+                name="email"
+                formControlName="email"
+            />
+        </label>
+        <div class="label">
+            @if (!formControls["email"].valid && formControls['email'].touched) {
+                <span class="label-text-alt font-bold text-error">
+                    {{errorHandler('email')}}
+                </span>
+            }
+        </div>
+        <label class="input input-bordered flex items-center gap-2">
+            Username
+            <input
+                type="text"
+                class="grow max-w-sm"
+                placeholder="ironman495"
+                name="username"
+                formControlName="username"
+            />
+        </label>
+        <div class="label">
+            @if (!formControls["username"].valid && formControls['username'].touched) {
+                <span class="label-text-alt font-bold text-error">
+                    {{errorHandler('username')}}
+                </span>
+            }
+        </div>
+        <label class="input input-bordered flex items-center gap-2">
+            Password
+            <input
+                type="password"
+                class="grow"
+                placeholder="secretCode"
+                name="password"
+                formControlName="password"
+            />
+        </label>
+        <div class="label">
+            @if (!formControls["password"].valid && formControls['password'].touched) {
+                <span class="label-text-alt font-bold text-error">
+                    {{errorHandler('password')}}
+                </span>
+            }
+        </div>
+        <label class="input input-bordered flex items-center gap-2">
+            <span class="text-sm">Confirm Password</span>
+            <input
+                type="password"
+                class="grow"
+                placeholder="one more time"
+                name="passwordConfirm"
+                formControlName="passwordConfirm"
+            />
+        </label>
+        {{formControls["passwordConfirm"].touched}}
+        <div class="label">
+            @if (!formControls["passwordConfirm"].valid && formControls["password"].touched) {
+                <span class="label-text-alt font-bold text-error">
+                    {{errorHandler('passwordConfirm')}}
+                    bad
+                </span>
+            }
+        </div>
+        <button class="btn btn-primary w-full">
+            Login
+        </button>
+    </form>
+    <div class="my-3">
+        Already a user? <a class="underline" routerLink="/login">Login</a>
+        <!-- BONUS: no validation can be shown here, the button will be disabled until user fill all inputs -->
+    </div>
+</div>

@@ -1,1 +1,65 @@
-<p>login-route works!</p>
+<div class="container mx-auto p-3">
+    <form
+        #loginForm="ngForm"
+        (ngSubmit)="submit(loginForm)"
+        class="border border-primary rounded-xl shadow-lg max-w-xl mx-auto p-3"
+    >
+        <h1 class="text-3xl font-bold mt-3 mb-5">Login</h1>
+        <label class="input input-bordered flex items-center gap-2">
+            Email
+            <input
+                type="email"
+                class="grow max-w-sm"
+                placeholder="user@example.com"
+                required
+                ngModel
+                name="email"
+                #email="ngModel"
+                pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+            />
+        </label>
+        <div class="label">
+            @if (email.invalid && email.touched) {
+                @if (email.errors?.["required"]) {
+                    <span class="label-text-alt font-bold text-error"
+                    >Email is required</span>
+                } @else if (email.errors?.["pattern"]) {
+                    <span class="label-text-alt font-bold text-error"
+                    >Please enter a valid email address</span>
+                }
+            }
+        </div>
+        <label class="input input-bordered flex items-center gap-2">
+            Password
+            <input
+                type="password"
+                class="grow"
+                placeholder="secretCode"
+                required
+                ngModel
+                name="password"
+                #password="ngModel"
+                pattern=".{8,}"
+            />
+        </label>
+        <div class="label">
+            @if (password.invalid && password.touched) {
+                @if (password.errors?.["required"]) {
+                    <span class="label-text-alt font-bold text-error"
+                    >Password is required</span>
+                } @else if (password.errors?.["pattern"]) {
+                    <span class="label-text-alt font-bold text-error"
+                    >Please enter a valid password (at least 8 characters)</span>
+                }
+            }
+        </div>
+        <button class="btn btn-primary w-full" [disabled]="!loginForm.valid">
+            Login
+        </button>
+    </form>
+    <div class="my-3">
+        Don’t have account? <a class="underline" routerLink="/register"
+        >Register</a>
+        <!-- BONUS: no validation can be shown here, the button will be disabled until user fill all inputs -->
+    </div>
+</div>
