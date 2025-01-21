@@ -14,11 +14,15 @@ import { RouterLink } from "@angular/router";
 export class CartRouteComponent {
   private cartService = inject(CartService);
   private productsService = inject(ProductsService);
+
+  loading: boolean = true;
+
   items: { product: Product; quantity: number }[] = [];
 
   constructor() {}
 
   async load() {
+    this.loading = true
     const cartItems = await this.cartService.listItems();
     this.items = await Promise.all(cartItems.map(async (item) => {
       return {
@@ -27,7 +31,9 @@ export class CartRouteComponent {
         ),
         quantity: item.quantity,
       };
-    }));
+    })).finally(()=>{
+      this.loading = false
+    });
   }
 
   async ngOnInit() {
@@ -42,7 +48,10 @@ export class CartRouteComponent {
     this.cartService.removeItem(itemId, 1).finally(() => this.load());
   }
 
-  removeItem(itemId: number){
-    this.cartService.removeItem(itemId, this.items.find(i=>i.product.id === itemId)!.quantity).finally(() => this.load());
+  removeItem(itemId: number) {
+    this.cartService.removeItem(
+      itemId,
+      this.items.find((i) => i.product.id === itemId)!.quantity,
+    ).finally(() => this.load());
   }
 }

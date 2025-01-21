@@ -1,4 +1,4 @@
-import { inject, Injectable } from "@angular/core";
+import { inject, Injectable, signal } from "@angular/core";
 import { ProductsService } from "./products.service";
 import { firstValueFrom } from "rxjs";
 
@@ -16,6 +16,7 @@ export class CartService {
   items: CartItem[] = [];
 
   private productsService = inject(ProductsService);
+  totalItems = signal(0)
 
   constructor() {
     this.#_load()
@@ -23,6 +24,9 @@ export class CartService {
 
   #_store(){
     window.localStorage.setItem(cart_storage_key, JSON.stringify(this.items))
+    this.totalItems.set(
+      this.items.reduce((total, item)=>total+item.quantity, 0)
+    )
   }
 
   #_load(){
@@ -30,6 +34,9 @@ export class CartService {
     if(raw){
       try{
         this.items = JSON.parse(raw)
+        this.totalItems.set(
+          this.items.reduce((total, item)=>total+item.quantity, 0)
+        )
       }catch(e){
         window.localStorage.removeItem(cart_storage_key)
       }

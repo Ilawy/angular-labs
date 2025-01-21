@@ -1,0 +1,18 @@
+
+
+.customProductCart{
+    transition: 400ms;
+    will-change: transform;
+    figure img{
+        transition: 325ms;
+        will-change: transform;
+
+    }
+    &:hover{
+        scale: 1.025;
+        figure img{
+            scale: 1.25;
+            translate: 0 2%;
+        }
+    }
+}

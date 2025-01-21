@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -8,5 +9,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  private cartService = inject(CartService);
+  total: Signal<number>
+  constructor(){
+    this.total = this.cartService.totalItems
+  }
 
+  
 }

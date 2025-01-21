@@ -1,5 +1,5 @@
 @if(product){
-    <a class="card bg-base-100 shadow-xl border border-gray-700 w-[32ch] m-3 inline-block text-left" [routerLink]="'/product/' + product.id">
+    <a class="customProductCart card bg-base-100 shadow-xl border border-gray-900 w-[32ch] m-3 text-left flex hover:shadow-2xl" [routerLink]="'/product/' + product.id">
         <figure class="relative">
             <span class="absolute top-2 left-2 badge badge-success text-white font-bold">
                 {{product.stock > 0 ? "In" : "Out of"}} stock
@@ -19,7 +19,7 @@
                 ★★★★★
              </div>
             {{ product.tags.join(", ") }}
-            <div class="card-actions justify-end">
+            <div class="card-actions justify-end mt-auto">
                 <button class="btn btn-sm btn-primary">Buy Now</button>
             </div>
         </div>

@@ -2,11 +2,15 @@
     "folder-color.pathColors": [
         {
             "folderPath": "task_1/src/app/routes/index-route/",
-            "color": "foldercolorizer.color_00cc00",
+            "color": "foldercolorizer.color_00cc00"
         },
         {
-            "folderPath": "task_1/src/",
-            "color": "foldercolorizer.color_00ccff"
+            "folderPath": "task_1/src/app/components/product-card/",
+            "color": "foldercolorizer.color_666600"
+        },
+        {
+            "folderPath": "task_1/src/app/routes/product-route/",
+            "color": "foldercolorizer.color_660099"
         }
     ]
 }
